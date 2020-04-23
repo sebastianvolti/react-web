@@ -1,5 +1,5 @@
 .weatherDataCont {
-   background-color: aquamarine; 
+   background-color: bisque; 
    width: 400px;
    height: 100px;
    line-height: 100px; 
@@ -7,7 +7,7 @@
 }
 
 .weatherExtraInfoCont{
-    background-color: aquamarine; 
+    background-color: bisque; 
     width: 40%;
     display: inline-block;
     line-height: 28px;
@@ -25,4 +25,8 @@
     font-weight: bold;
     padding-left: 20px;
     color: #333;
+}
+
+.wicon{
+    color: black;
 }
