@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {Component} from 'react';
 import AppBar from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import {Grid, Col, Row} from 'react-flexbox-grid';
 import LocationList from './components/LocationList';
+import ForecastExtended from './components/ForecastExtended';
+
 import './App.css';
 
 const cities = [
@@ -14,36 +16,56 @@ const cities = [
   "Oranjestad,aru",
 ];
 
-function App() {
+//Ciclo de vida:
+//  Orden de ejecuciones y renderizado:
+//  constructor (app.js)
+//  state = ..
+//  render
+//    component1 ->
+//                render ..
+//    component2 -> 
+//                render ..
 
-  const handleSelectionLocation = city => {
+class App extends Component {
+  constructor() {
+    super();
+    this.state = { city: null}
+  }
+
+  handleSelectionLocation = city => {
+    this.setState({city:city});
     console.log(`handleSelectionLocation ${city}`);
   };
 
+  render(){
+    const {city} = this.state;
     return (
       <Grid>
-          <AppBar position="static">
-            <Toolbar className="nav-bar">
-              <Typography variant="title" color="initial">
-                <span className="titleText"> Weather App</span>
-              </Typography>
-            </Toolbar>
-          </AppBar>
+        <AppBar position="static">
+          <Toolbar className="nav-bar">
+            <Typography variant="title" color="initial">
+              <span className="titleText"> Weather App</span>
+            </Typography>
+          </Toolbar>
+        </AppBar>
         <Row>
           <Col xs={12} md={6}>
             <LocationList 
               cities={cities} 
-              onSelectedLocation={handleSelectionLocation}>
+              onSelectedLocation={this.handleSelectionLocation}>
             </LocationList>
           </Col>
           <Col xs={12} md ={6}>
-              <div className="details"></div>
+              <div className="details">
+                {
+                  city === null ?  <h1>No se seleccionó ciudad</h1> : <ForecastExtended city={city}></ForecastExtended>
+                }
+              </div>
           </Col>
         </Row>  
       </Grid>
-    
     );
-
+  }
 }
 
 export default App;
