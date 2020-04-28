@@ -8,12 +8,16 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "lodash-es": "^4.17.15",
+    "lodash-move": "^1.1.1",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-flexbox-grid": "^2.1.2",
     "react-scripts": "3.4.1",
+    "react-spring": "^8.0.27",
+    "react-use-gesture": "^7.0.15",
     "react-weathericons": "^1.0.4"
   },
   "scripts": {

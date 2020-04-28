@@ -7,7 +7,9 @@ import {Grid, Col, Row} from 'react-flexbox-grid';
 import LocationList from './components/LocationList';
 import ForecastExtended from './components/ForecastExtended';
 import Paper from '@material-ui/core/Paper';
-
+import ForecastMain from './animation/ForecastMain'
+import AnimationMain from './animation/AnimationMain'
+import DraggableList from './cards/DraggableList'
 
 import './App.css';
 
@@ -87,7 +89,7 @@ class App extends Component {
             <Paper elevation={3}>
               <div className="details">
                 {
-                  city === null ?  <h2 className="forecast-title">Pronostico Extendido</h2> : <ForecastExtended city={city}></ForecastExtended>
+                  city === null ? <AnimationMain></AnimationMain> : <ForecastExtended city={city}></ForecastExtended>
                 }
               </div>
             </Paper>
