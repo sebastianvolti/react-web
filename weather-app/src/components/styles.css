@@ -9,8 +9,22 @@ medida de máximo 64em */
 @media (max-width: 64em){ 
     .locationList {
         /*background: green;*/
-        max-height: 30vh;
-        overflow: auto;
+        max-height: 40vh;
         margin-bottom: 20px;
     }
+}
+
+.locationList {
+  height: 85vh;
+  overflow: auto;
+  margin-bottom: 20px;
+}
+
+.forecast-title {
+  color: rgb(41, 39, 48);
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  
+
 }
