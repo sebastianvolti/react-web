@@ -21,14 +21,14 @@ function AnimationMain() {
   )
 
   return (
-    <div class="list" style={{ height }}>
+    <div className="list" style={{ height }}>
       {transitions.map(({ item, props: { y, ...rest }, key }, index) => (
         <animated.div
           key={key}
-          class="card"
+          className="card"
           style={{ zIndex: data.length - index, transform: y.interpolate(y => `translate3d(0,${y}px,0)`), ...rest }}>
-          <div class="cell">
-            <div class="details" style={{ backgroundImage: item.css }} />
+          <div className="cell">
+            <div className="details" style={{ backgroundImage: item.css }} />
           </div>
         </animated.div>
       ))}
