@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import propTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {setCity} from './../actions';
+import {setSelectedCity} from './../actions';
 import LocationList from './../components/LocationList';
 
 class LocationListContainer extends Component {
@@ -29,7 +29,7 @@ LocationListContainer.propTypes = {
 //retorna el objeto setCity
 //el dispatch llama a nuestro action creator creado, llamado setCity
 const mapDispatchToPropsActions = dispatch => ({
-    dispatchSetCity: value => dispatch(setCity(value))
+    dispatchSetCity: value => dispatch(setSelectedCity(value))
   });
   
 //connect espera 2 funciones como param, y retorna otra funcion que espera un componente como param

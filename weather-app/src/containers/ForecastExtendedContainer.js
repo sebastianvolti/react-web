@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { getForecastDataFromCities, getCity } from './../reducers';
 import ForecastExtended from '../components/ForecastExtended';
 import AnimationMain from './../animation/AnimationMain'
+
 class ForecastExtendedContainer extends Component {
     render() {
+        const {city, forecastData} = this.props;
         return (
-             this.props.city === null ? <AnimationMain/> :  <ForecastExtended city={this.props.city}/>
+             city === null ? <AnimationMain/> :  <ForecastExtended city={city} forecastData={forecastData}/>
         );
     }
 }
@@ -15,10 +18,11 @@ class ForecastExtendedContainer extends Component {
 //const mapStateToProps = state => ({city : state.city});
 
 //forma corta
-const mapStateToProps = ({city}) => ({city});
+const mapStateToProps = state => ({city: getCity(state), forecastData: getForecastDataFromCities(state)});
 
 ForecastExtendedContainer.propTypes = {
     city: propTypes.string.isRequired,
+    forecastData: propTypes.array,
 };
 
 export default connect(
