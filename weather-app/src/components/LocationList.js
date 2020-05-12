@@ -14,9 +14,10 @@ const LocationList = ({cities, onSelectedLocation}) => {
         cities.map(city => 
             (
             <WeatherLocation 
-                key={city}   //se le agrega key al componente, para que react haga mas eficiente la renderizacion (solo refresca el comp q cambia, sino refresca todo)
-                city ={city}  //recorre cada una de las city de cities, y se le aplica la func pasada por parametro 
-                onWeatherLocationClick={() => handleWeatherLocationClick(city)} />))
+                key={city.key}   //se le agrega key al componente, para que react haga mas eficiente la renderizacion (solo refresca el comp q cambia, sino refresca todo)
+                city ={city.name}  //recorre cada una de las city de cities, y se le aplica la func pasada por parametro 
+                onWeatherLocationClick={() => handleWeatherLocationClick(city.name)} 
+                data={city.data}/>))
     );                                                            
     
     return(
@@ -28,6 +29,7 @@ const LocationList = ({cities, onSelectedLocation}) => {
 
 LocationList.propTypes = {
     cities: propTypes.array.isRequired,
+    onSelectedLocation: propTypes.func,
 }
 
 export default LocationList;

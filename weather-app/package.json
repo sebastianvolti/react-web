@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^7.1.2",
     "lodash-es": "^4.17.15",
     "lodash-move": "^1.1.1",
+    "lodash.topairs": "^4.3.0",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
@@ -21,7 +22,8 @@
     "react-use-gesture": "^7.0.15",
     "react-weathericons": "^1.0.4",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
