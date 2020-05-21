@@ -2,34 +2,18 @@ import React, { Component } from 'react';
 import CustomersList from './../components/CustomersList';
 import AppFrame from './../components/AppFrame';
 import CustomersActions from './../components/CustomersActions';
+import { fetchCustomers } from './../actions/fetchCustomers';
 import {withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
 import propTypes from 'prop-types';
-
-const customers = [
-    {
-    "ci":"51759147",
-    "name":"Sebastián Volti",
-    "age":"25"
-    },
-    {
-    "ci":"11111111",
-    "name":"Juan Perez",
-    "age":"30"
-    },
-    {
-    "ci":"22222222",
-    "name":"Juan Rodriguez",
-    "age":"30"
-    },
-    {
-    "ci":"33333333",
-    "name":"Lucia Gonzalez",
-    "age":"35"
-    }
-];
+import { getCustomers } from './../selectors/customers'
 
 class CustomersContainer extends Component {
-    
+
+    componentDidMount() {
+        this.props.fetchCustomers();
+    }
+
     handleAddNew = () => {
         this.props.history.push("/customers/new");
     }
@@ -37,7 +21,7 @@ class CustomersContainer extends Component {
         <div>
             <CustomersList 
                 customers={customers} 
-                urlPath={'customer/'}>
+                urlPath={'customers/'}>
             </CustomersList>
             <CustomersActions>
                 <button onClick={this.handleAddNew}>Nuevo Cliente</button>
@@ -49,7 +33,7 @@ class CustomersContainer extends Component {
             <div>
                 <AppFrame 
                     header={'Listado de clientes'}
-                    body={this.renderBody(customers)}>
+                    body={this.renderBody(this.props.customers)}>
                 </AppFrame>
             </div>
         );
@@ -57,7 +41,18 @@ class CustomersContainer extends Component {
 }
 
 CustomersContainer.propTypes = {
-    
+    fetchCustomers: propTypes.func.isRequired,
+    customers: propTypes.array.isRequired,
 };
 
-export default withRouter(CustomersContainer);
+const mapDispatchToProps = { fetchCustomers };
+
+CustomersContainer.defaultProps = {
+   customers: [ ]
+};
+
+const mapStateToProps = state => ({
+    customers: getCustomers(state)
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CustomersContainer));
