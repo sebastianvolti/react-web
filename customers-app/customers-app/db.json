@@ -21,22 +21,22 @@
     {
     "ci":"51759147",
     "name":"Sebastián Volti",
-    "age":"25"
+    "age": 25
     },
     {
     "ci":"11111111",
     "name":"Juan Perez",
-    "age":"30"
+    "age": 25
     },
     {
     "ci":"22222222",
     "name":"Juan Rodriguez",
-    "age":"30"
+    "age": 30
     },
     {
     "ci":"33333333",
     "name":"Lucia Gonzalez",
-    "age":"35"
+    "age": 35
     } 
 ] 
 }

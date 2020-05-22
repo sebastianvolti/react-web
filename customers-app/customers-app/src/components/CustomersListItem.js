@@ -24,7 +24,7 @@ CustomersListItem.propTypes = {
     name: propTypes.string.isRequired,
     editAction: propTypes.string.isRequired,
     delAction: propTypes.string.isRequired,
-    urlPath:  propTypes.isRequired,
+    urlPath:  propTypes.string.isRequired,
     ci: propTypes.string.isRequired,
 };
 
