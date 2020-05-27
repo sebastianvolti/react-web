@@ -7,6 +7,8 @@ import { getCustomersByCi } from './../selectors/customers';
 import CustomerEdit from './../components/CustomerEdit'
 import CustomerData from './../components/CustomerData'
 import {fetchCustomers} from './../actions/fetchCustomers';
+import {updateCustomer} from './../actions/updateCustomer';
+import { SubmissionError } from 'redux-form';
 
 //<p>Datos del Cliente "{this.props.customer.name}"</p>
 class CustomerContainer extends Component {
@@ -20,6 +22,16 @@ class CustomerContainer extends Component {
 
     handleSubmit = values => {
         console.log(JSON.stringify(values));
+        const {id} = values;
+        return this.props.updateCustomer(id, values).then( r => {
+            if (r.error){
+                throw new SubmissionError(r.payload);
+            }
+        });
+    }
+
+    handleOnSubmitSuccess = () => {
+        this.props.history.goBack();
     }
     
     handleOnBack = () => {
@@ -32,6 +44,7 @@ class CustomerContainer extends Component {
                 const CustomerControl = match ? CustomerEdit : CustomerData;
                 return <CustomerControl {...this.props.customer} 
                                         onSubmit={this.handleSubmit} 
+                                        onSubmitSuccess={this.handleOnSubmitSuccess}
                                         onBack={this.handleOnBack}/>
                 //return <CustomerControl initialValues={this.props.customer} />  asi anda, pasando valores iniciales
                                                                                  // pero no sirve de nada validar props del lado del componente
@@ -55,7 +68,8 @@ class CustomerContainer extends Component {
 CustomerContainer.propTypes = {
     ci: propTypes.string.isRequired,
     customer: propTypes.object,
-    fetchCustomers: propTypes.func.isRequired
+    fetchCustomers: propTypes.func.isRequired,
+    updateCustomer: propTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, props) => ({
@@ -63,5 +77,6 @@ const mapStateToProps = (state, props) => ({
 });
 
 export default withRouter(connect(mapStateToProps, {
-    fetchCustomers
+    fetchCustomers,
+    updateCustomer
 })(CustomerContainer));
