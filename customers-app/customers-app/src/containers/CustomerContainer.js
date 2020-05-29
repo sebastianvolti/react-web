@@ -8,6 +8,7 @@ import CustomerEdit from './../components/CustomerEdit'
 import CustomerData from './../components/CustomerData'
 import {fetchCustomers} from './../actions/fetchCustomers';
 import {updateCustomer} from './../actions/updateCustomer';
+import {deleteCustomer} from './../actions/deleteCustomer';
 import { SubmissionError } from 'redux-form';
 
 //<p>Datos del Cliente "{this.props.customer.name}"</p>
@@ -30,6 +31,27 @@ class CustomerContainer extends Component {
         });
     }
 
+    handleOnDelete = id => {
+        console.log("handleOnDelete");
+        this.props.deleteCustomer(id).then(v => {
+            this.props.history.goBack();
+        });
+    }
+
+    renderCustomerControl = (isEdit, isDelete) => {
+        if (this.props.customer){
+            const CustomerControl = isEdit ? CustomerEdit : CustomerData;
+            return <CustomerControl {...this.props.customer} 
+                                    onSubmit={this.handleSubmit} 
+                                    onSubmitSuccess={this.handleOnSubmitSuccess}
+                                    onBack={this.handleOnBack}
+                                    isDeleteAllow={!!isDelete} //doble negacion, trusly => false real => true, falsy => true real => false
+                                    onDelete={this.handleOnDelete}/> 
+            //return <CustomerControl initialValues={this.props.customer} />  asi anda, pasando valores iniciales                                                                 // pero no sirve de nada validar props del lado del componente
+        }
+        return null;
+    }
+
     handleOnSubmitSuccess = () => {
         this.props.history.goBack();
     }
@@ -40,18 +62,13 @@ class CustomerContainer extends Component {
 
     renderBody = () => (
         <Route path="/customers/:ci/edit" children={
-            ({ match }) =>{
-                const CustomerControl = match ? CustomerEdit : CustomerData;
-                return <CustomerControl {...this.props.customer} 
-                                        onSubmit={this.handleSubmit} 
-                                        onSubmitSuccess={this.handleOnSubmitSuccess}
-                                        onBack={this.handleOnBack}/>
-                //return <CustomerControl initialValues={this.props.customer} />  asi anda, pasando valores iniciales
-                                                                                 // pero no sirve de nada validar props del lado del componente
-            }
-         }>
-        </Route>
-    );
+            ( { match: isEdit } ) => (  //aqui renombro match como isEdit
+                <Route path="/customers/:ci/del" children={
+                    ( { match: isDelete } ) => (  //aqui renombro match como isDelete
+                        this.renderCustomerControl(isEdit, isDelete))
+            } /> )
+        } />
+    )
 
     render(){
         return (
@@ -70,6 +87,7 @@ CustomerContainer.propTypes = {
     customer: propTypes.object,
     fetchCustomers: propTypes.func.isRequired,
     updateCustomer: propTypes.func.isRequired,
+    deleteCustomer: propTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, props) => ({
@@ -78,5 +96,6 @@ const mapStateToProps = (state, props) => ({
 
 export default withRouter(connect(mapStateToProps, {
     fetchCustomers,
-    updateCustomer
+    updateCustomer,
+    deleteCustomer
 })(CustomerContainer));

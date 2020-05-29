@@ -18,7 +18,6 @@ class HomeContainer extends Component {
                     header="Home"
                     body={
                         <div>
-                            Esta es la pantalla inicial
                             <CustomersActions>
                                 <button onClick={this.handleOnClick}>Listado de clientes</button>
                             </CustomersActions>

@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import CustomersActions from './CustomersActions';
 
-const CustomerData = ({ name, ci, age, onBack }) => {
+const CustomerData = ({ id,  name, ci, age, onBack, isDeleteAllow, onDelete }) => {
     return (
         <div>
             <div className="customer-data">
@@ -13,6 +13,7 @@ const CustomerData = ({ name, ci, age, onBack }) => {
             </div>
             <CustomersActions>
                 <button onClick={onBack}>Volver</button>
+                {isDeleteAllow &&  <button onClick={() => onDelete(id)}>Eliminar</button>}
             </CustomersActions>
         </div>
       
@@ -20,10 +21,12 @@ const CustomerData = ({ name, ci, age, onBack }) => {
 };
 
 CustomerData.propTypes = {
+    id: propTypes.string.isRequired,
     name: propTypes.string.isRequired,
     ci: propTypes.string.isRequired,
-    age: propTypes.number,
-    onBack: propTypes.func.isRequired
+    onBack: propTypes.func.isRequired,
+    isDeleteAllow: propTypes.bool,
+    onDelete: propTypes.func,
 };
 
 export default CustomerData;

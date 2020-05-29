@@ -20,20 +20,14 @@
     {
       "id": "51759147",
       "ci": "51759147",
-      "name": "Sebastián Volti Diano",
+      "name": "Sebastián Volti",
       "age": "25"
-    },
-    {
-      "id": "11111111",
-      "ci": "11111111",
-      "name": "Juan Perez",
-      "age": 30
     },
     {
       "id": "22222222",
       "ci": "22222222",
       "name": "Juan Rodriguez Peña",
-      "age": 30
+      "age": 80
     },
     {
       "id": "33333333",
@@ -42,16 +36,11 @@
       "age": 38
     },
     {
-      "name": "Juan Jose Dor",
-      "ci": "51458596",
-      "age": 19,
-      "id": "Qhe6l72"
-    },
-    {
       "name": "Rodrigo Grei",
       "ci": "47272721",
-      "age": 45,
-      "id": "RaEiXrS"
+      "age": 32,
+      "id": "RaEiXrS",
+      "isDeleteAllow": false
     }
   ]
 }
